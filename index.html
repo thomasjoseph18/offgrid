@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jal Rakshak - Smart Water Conservation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="js/app.js" defer></script>
+</head>
+<body>
+    <!-- Water Particles -->
+    <div class="water-particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="emoji">💧</span>
+                <div class="logo-text">
+                    <span class="en" data-i18n="logoEn">Jal Rakshak</span>
+                    <span class="hi" data-i18n="logoHi">जल रक्षक</span>
+                </div>
+            </div>
+            
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            
+            <ul class="nav-links">
+                <li><a href="#dashboard" data-i18n="navDashboard">Dashboard</a></li>
+                <li><a href="#calculator" data-i18n="navCalculator">Calculator</a></li>
+                <li><a href="#rainwater" data-i18n="navRainwater">Rainwater</a></li>
+                <li><a href="#watermap" data-i18n="navMap">Water Map</a></li>
+                <li><a href="#challenges" data-i18n="navChallenges">Challenges</a></li>
+                <li>
+                    <button id="lang-toggle" class="lang-btn">
+                        <span class="lang-en active">EN</span>|<span class="lang-hi">HI</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="hero">
+        <div class="hero-content">
+            <h1 class="gradient-text slide-up" data-i18n="heroHeadline">Every Drop Counts</h1>
+            <p class="subtitle slide-up delay-1" data-i18n="heroSubtitle">600M Indians face extreme water stress. Be the change today.</p>
+            <a href="#dashboard" class="cta-button slide-up delay-2" data-i18n="heroCta">Start Saving Water</a>
+        </div>
+        <div class="wave-container">
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+                <g class="parallax">
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(0, 180, 216, 0.7)" />
+                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(0, 212, 255, 0.5)" />
+                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(72, 202, 228, 0.3)" />
+                    <use xlink:href="#gentle-wave" x="48" y="7" fill="#0a1628" />
+                </g>
+            </svg>
+        </div>
+    </header>
+
+    <main>
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in" data-i18n="dashTitle">My Impact Dashboard</h2>
+                <div class="dashboard-grid">
+                    <div class="stat-card glass fade-in delay-1">
+                        <div class="stat-icon">💧</div>
+                        <div class="stat-value counter" id="dash-daily" data-target="0">0</div>
+                        <div class="stat-label" data-i18n="dashDaily">Your Daily Usage (L)</div>
+                    </div>
+                    <div class="stat-card glass fade-in delay-2">
+                        <div class="stat-icon">🌊</div>
+                        <div class="stat-value counter" id="dash-monthly" data-target="0">0</div>
+                        <div class="stat-label" data-i18n="dashMonthly">Monthly Saved (L)</div>
+                    </div>
+                    <div class="stat-card glass fade-in delay-3">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-value counter" id="dash-challenges" data-target="0">0</div>
+                        <div class="stat-label" data-i18n="dashChallenges">Challenges Done</div>
+                    </div>
+                    <div class="stat-card glass fade-in delay-4">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-value counter" id="dash-score" data-target="0">0</div>
+                        <div class="stat-label" data-i18n="dashScore">Green Score</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Water Footprint Calculator Section -->
+        <section id="calculator" class="section bg-alt">
+            <div class="container">
+                <h2 class="section-title fade-in" data-i18n="calcTitle">Water Footprint Calculator</h2>
+                <div class="calc-layout">
+                    <div class="calc-form glass fade-in">
+                        <div class="form-group">
+                            <label><span class="emoji">🚿</span> <span data-i18n="calcShower">Shower (mins/day)</span>: <span id="val-shower" class="val-display">5</span></label>
+                            <input type="range" id="range-shower" class="custom-slider" min="0" max="30" value="5">
+                        </div>
+                        <div class="form-group">
+                            <label><span class="emoji">🚽</span> <span data-i18n="calcToilet">Toilet (flushes/day)</span>: <span id="val-toilet" class="val-display">4</span></label>
+                            <input type="range" id="range-toilet" class="custom-slider" min="0" max="15" value="4">
+                        </div>
+                        <div class="form-group">
+                            <label><span class="emoji">👕</span> <span data-i18n="calcLaundry">Laundry (loads/week)</span>: <span id="val-laundry" class="val-display">3</span></label>
+                            <input type="range" id="range-laundry" class="custom-slider" min="0" max="14" value="3">
+                        </div>
+                        <div class="form-group">
+                            <label><span class="emoji">🍽️</span> <span data-i18n="calcDishes">Dishes (mins/day)</span>: <span id="val-dishes" class="val-display">15</span></label>
+                            <input type="range" id="range-dishes" class="custom-slider" min="0" max="60" value="15">
+                        </div>
+                        <div class="form-group">
+                            <label><span class="emoji">🚰</span> <span data-i18n="calcDrinking">Drinking/Cooking (L/day)</span>: <span id="val-drinking" class="val-display">5</span></label>
+                            <input type="range" id="range-drinking" class="custom-slider" min="1" max="20" value="5">
+                        </div>
+                        <div class="form-group">
+                            <label><span class="emoji">🚗</span> <span data-i18n="calcCar">Car Wash (times/month)</span>: <span id="val-car" class="val-display">2</span></label>
+                            <input type="range" id="range-car" class="custom-slider" min="0" max="10" value="2">
+                        </div>
+                        <div class="form-group">
+                            <label><span class="emoji">🌱</span> <span data-i18n="calcGarden">Garden (mins/week)</span>: <span id="val-garden" class="val-display">20</span></label>
+                            <input type="range" id="range-garden" class="custom-slider" min="0" max="120" value="20">
+                        </div>
+                    </div>
+                    
+                    <div class="calc-results glass fade-in delay-1">
+                        <div class="total-display">
+                            <h3 data-i18n="calcTotalDaily">Total Daily Usage</h3>
+                            <div class="big-number"><span id="total-liters">0</span> L</div>
+                            <div class="status-badge" id="usage-status">Good</div>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <canvas id="footprintChart"></canvas>
+                        </div>
+                        
+                        <div class="equivalents">
+                            <p>💡 <span data-i18n="calcEqPrefix">That's equivalent to</span> <strong id="eq-buckets">0</strong> <span data-i18n="calcEqBuckets">buckets a day or</span> <strong id="eq-pools">0</strong> <span data-i18n="calcEqPools">swimming pools per year!</span></p>
+                        </div>
+                        
+                        <div class="tip-box" id="personalized-tip">
+                            <!-- Tip injected here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rainwater Harvesting Section -->
+        <section id="rainwater" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in" data-i18n="rainTitle">Rainwater Harvest & ROI Calculator</h2>
+                <div class="rain-layout">
+                    <div class="rain-form glass fade-in">
+                        <div class="input-group">
+                            <label data-i18n="rainCity">Select City (Avg Rainfall)</label>
+                            <select id="rain-city" class="custom-select">
+                                <option value="2400">Mumbai (2400mm)</option>
+                                <option value="1800">Kolkata (1800mm)</option>
+                                <option value="1400">Chennai (1400mm)</option>
+                                <option value="970">Bangalore (970mm)</option>
+                                <option value="800">Delhi (800mm)</option>
+                                <option value="800">Hyderabad (800mm)</option>
+                                <option value="600">Jaipur (600mm)</option>
+                                <option value="custom" data-i18n="rainCustom">Custom</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label data-i18n="rainRainfall">Annual Rainfall (mm)</label>
+                            <input type="number" id="rain-amount" value="2400" min="0">
+                        </div>
+                        <div class="input-group">
+                            <label data-i18n="rainArea">Roof Area (sq. meters)</label>
+                            <input type="number" id="rain-area" value="100" min="10">
+                        </div>
+                        <div class="form-group">
+                            <label><span data-i18n="rainCoeff">Runoff Coefficient</span>: <span id="val-coeff" class="val-display">0.8</span></label>
+                            <input type="range" id="range-coeff" class="custom-slider" min="0.5" max="0.95" step="0.05" value="0.8">
+                        </div>
+                        <button id="btn-share-rain" class="cta-button secondary w-100 mt-4" data-i18n="rainShare">Share Results</button>
+                    </div>
+                    
+                    <div class="rain-results glass fade-in delay-1">
+                        <div class="rain-stats-grid">
+                            <div class="rain-stat">
+                                <div class="rain-icon">🌧️</div>
+                                <div class="rain-val"><span id="res-harvest">0</span> L</div>
+                                <div class="rain-lbl" data-i18n="rainAnnual">Annual Harvest</div>
+                            </div>
+                            <div class="rain-stat">
+                                <div class="rain-icon">💰</div>
+                                <div class="rain-val">₹<span id="res-money">0</span></div>
+                                <div class="rain-lbl" data-i18n="rainSaved">Money Saved/Yr</div>
+                            </div>
+                            <div class="rain-stat">
+                                <div class="rain-icon">🌱</div>
+                                <div class="rain-val"><span id="res-co2">0</span> kg</div>
+                                <div class="rain-lbl" data-i18n="rainCo2">CO2 Offset</div>
+                            </div>
+                            <div class="rain-stat">
+                                <div class="rain-icon">👨‍👩‍👧‍👦</div>
+                                <div class="rain-val"><span id="res-days">0</span></div>
+                                <div class="rain-lbl" data-i18n="rainDays">Days of Supply</div>
+                            </div>
+                        </div>
+                        <div class="chart-container mt-4">
+                            <h4 data-i18n="rainRoiChart">5-Year ROI Timeline (Cumulative Savings vs Cost)</h4>
+                            <canvas id="roiChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- India Water Map Section -->
+        <section id="watermap" class="section bg-alt">
+            <div class="container">
+                <h2 class="section-title fade-in" data-i18n="mapTitle">India Water Stress Map</h2>
+                <div class="map-filters fade-in">
+                    <button class="filter-btn active" data-filter="all" data-i18n="filterAll">All States</button>
+                    <button class="filter-btn" data-filter="critical" data-i18n="filterCritical">Critical</button>
+                    <button class="filter-btn" data-filter="high" data-i18n="filterHigh">High</button>
+                    <button class="filter-btn" data-filter="medium" data-i18n="filterMedium">Medium</button>
+                    <button class="filter-btn" data-filter="low" data-i18n="filterLow">Low</button>
+                </div>
+                
+                <div class="states-grid" id="states-grid">
+                    <!-- Cards injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenges Section -->
+        <section id="challenges" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in" data-i18n="chalTitle">Water Saving Challenges</h2>
+                
+                <div class="challenges-progress glass fade-in">
+                    <div class="progress-header">
+                        <span data-i18n="chalProgress">Your Progress:</span>
+                        <span id="chal-count">0/8 Completed</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" id="chal-progress-bar" style="width: 0%"></div>
+                    </div>
+                    <div class="badges-container" id="badges-container">
+                        <div class="badge locked" id="badge-1" title="Novice Saver">🥉</div>
+                        <div class="badge locked" id="badge-3" title="Water Warrior">🥈</div>
+                        <div class="badge locked" id="badge-5" title="Eco Champion">🥇</div>
+                        <div class="badge locked" id="badge-8" title="Jal Rakshak">👑</div>
+                    </div>
+                </div>
+
+                <div class="challenges-grid" id="challenges-grid">
+                    <!-- Challenges injected by JS -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo">
+                        <span class="emoji">💧</span>
+                        <div class="logo-text">Jal Rakshak</div>
+                    </div>
+                    <p class="mt-2" data-i18n="footerAbout">Empowering Indians to conserve our most precious resource through awareness, tracking, and action.</p>
+                </div>
+                <div class="footer-links">
+                    <h4 data-i18n="footerQuick">Quick Links</h4>
+                    <ul>
+                        <li><a href="#dashboard" data-i18n="navDashboard">Dashboard</a></li>
+                        <li><a href="#calculator" data-i18n="navCalculator">Calculator</a></li>
+                        <li><a href="#rainwater" data-i18n="navRainwater">Rainwater</a></li>
+                        <li><a href="#challenges" data-i18n="navChallenges">Challenges</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <div class="hackathon-badge">
+                        <span class="pulse"></span> Built for Hackathon 2026
+                    </div>
+                    <div class="made-in mt-4">
+                        Made with ❤️ in India
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Jal Rakshak. <span data-i18n="footerRights">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
