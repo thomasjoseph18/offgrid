@@ -34,17 +34,12 @@ This is a purely static web application.
 2. Open `index.html` in any modern web browser (Chrome, Firefox, Safari, Edge).
 3. No build tools, no `npm install` needed!
 
-## 📸 Screenshots
-*(Add screenshots of the Dashboard, Calculators, and Map here)*
 
 ## 👥 Team
-- Built for Hackathon 2026.
+- Built for Offgrid Hackathon 2026.
 - Made with ❤️ in India.
 
 ## 🔮 Future Scope
 - Integration with smart water meters via IoT.
 - Community leaderboards and sharing to social media.
 - Push notifications for daily reminders.
-
-## 📄 License
-MIT License.
