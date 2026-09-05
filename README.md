@@ -2,7 +2,6 @@
 
 **India's Smart Water Conservation Platform**
 
-![Jal Rakshak Banner](https://via.placeholder.com/1200x400/0a1628/00d4ff?text=Jal+Rakshak+-+Every+Drop+Counts)
 
 ## 🚨 The Problem
 India is facing one of the worst water crises in its history:
